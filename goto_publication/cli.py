@@ -141,6 +141,7 @@ def get_arguments_parser():
     parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + p_version)
     parser.add_argument('-f', '--format', help='output format (json, yaml)', choices=('json', 'yaml'), default='yaml')
     parser.add_argument('-r', '--repeat-input', help='repeat input in the output', action='store_true')
+    parser.add_argument('-J', '--journal-registry', help='path to the journal registry', default=JOURNAL_REGISTRY)
 
     subparsers = parser.add_subparsers(dest='search_section', help='search section')
 
@@ -170,7 +171,7 @@ def get_arguments_parser():
         help='Severity cutoff on the results (must be between 0 and 1, the larger, the severer)',
         default=0.6)
 
-    # get journal infos
+    # get journal info
     parser_journal = subparsers.add_parser('journal')
     parser_journal.add_argument('q', help='journal name')
 
@@ -202,7 +203,7 @@ def main():
     args = parser.parse_args()
 
     # create journal registry
-    journal_registry = registry.Registry(JOURNAL_REGISTRY, create_providers())
+    journal_registry = registry.Registry(args.journal_registry, create_providers())
 
     # output what was requested
     if args.search_section == 'providers':
