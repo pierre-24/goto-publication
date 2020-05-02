@@ -52,6 +52,11 @@ setup(
 
     # requirements
     install_requires=requirements,
+    package_data={'iso4': ['journal_registry.yml']},
+
+    entry_points={
+        'console_scripts': ['goto-publication = goto_publication.cli:main']
+    },
 
     extras_require={  # Optional
         'dev': requirements_dev,
