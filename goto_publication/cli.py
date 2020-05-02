@@ -7,7 +7,11 @@ from goto_publication import registry
 from goto_publication import create_providers, JOURNAL_REGISTRY, __version__ as p_version
 
 
-def list_providers(args: argparse.Namespace, journal_registry: registry.Registry):
+def make_error(msg: str, arg: str) -> dict:
+    return {'message': {arg: msg}}
+
+
+def list_providers(args: argparse.Namespace, journal_registry: registry.Registry) -> Dict:
     """
     :param args: Arguments
     :param journal_registry: journal registry
@@ -26,7 +30,7 @@ def list_providers(args: argparse.Namespace, journal_registry: registry.Registry
     }
 
 
-def list_journals(args: argparse.Namespace, journal_registry: registry.Registry):
+def list_journals(args: argparse.Namespace, journal_registry: registry.Registry) -> Dict:
     """
     :param args: Arguments
     :param journal_registry: journal registry
@@ -54,6 +58,43 @@ def list_journals(args: argparse.Namespace, journal_registry: registry.Registry)
     }
 
 
+def suggests(args: argparse.Namespace, journal_registry: registry.Registry) -> Dict:
+    """
+    :param args: Arguments
+    :param journal_registry: journal registry
+    """
+
+    try:
+        return {
+            'request': args.q,
+            'source': args.source,
+            'count': args.count,
+            'cutoff': args.cutoff,
+            'suggestions': journal_registry.suggest_journals(
+                args.q, args.source, args.count, args.cutoff
+            )
+        }
+    except registry.RegistryError as e:
+        return make_error(e.what, e.var)
+
+
+def journal(args: argparse.Namespace, journal_registry: registry.Registry) -> Dict:
+    """
+    :param args: Arguments
+    :param journal_registry: journal registry
+    """
+
+    if args.q in journal_registry.journals:
+        j = journal_registry.journals[args.q]
+        return {
+            'journal': j.name,
+            'abbreviation': j.abbr,
+            'provider': j.provider.get_info()
+        }
+    else:
+        return make_error('unknown journal', 'q')
+
+
 def get_arguments_parser():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + p_version)
@@ -66,9 +107,30 @@ def get_arguments_parser():
     parser_list_providers.add_argument('-s', '--start', help='result offset', type=int, default=0)
     parser_list_providers.add_argument('-c', '--count', help='Maximum number of results', type=int, default=10)
 
+    # list journals
     parser_list_journals = subparsers.add_parser('journals')
     parser_list_journals.add_argument('-s', '--start', help='result offset', type=int, default=0)
     parser_list_journals.add_argument('-c', '--count', help='Maximum number of results', type=int, default=10)
+
+    # suggests journal
+    parser_suggests = subparsers.add_parser('suggests')
+    parser_suggests.add_argument('q', help='query')
+    parser_suggests.add_argument(
+        '-S', '--source',
+        choices=('title', 'abbr'),
+        help='search in journal title (title) or abbreviation (abbr, default)',
+        default='abbr'
+    )
+    parser_suggests.add_argument('-c', '--count', help='Maximum number of results', type=int, default=10)
+    parser_suggests.add_argument(
+        '-C', '--cutoff',
+        type=float,
+        help='Severity cutoff on the results (must be between 0 and 1, the larger, the severer)',
+        default=0.6)
+
+    # get journal infos
+    parser_journal = subparsers.add_parser('journal')
+    parser_journal.add_argument('q', help='journal name')
 
     return parser
 
@@ -97,6 +159,10 @@ def main():
         dumps(args, list_providers(args, journal_registry))
     elif args.search_section == 'journals':
         dumps(args, list_journals(args, journal_registry))
+    elif args.search_section == 'suggests':
+        dumps(args, suggests(args, journal_registry))
+    elif args.search_section == 'journal':
+        dumps(args, journal(args, journal_registry))
 
 
 if __name__ == '__main__':
