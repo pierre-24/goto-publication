@@ -22,12 +22,18 @@ def list_providers(args: argparse.Namespace, journal_registry: registry.Registry
 
     li = list(p.get_info() for p in journal_registry.providers.values())[start:start + count]
 
-    return {
-        'start': start,
-        'count': len(li),
+    response = {
         'total': len(journal_registry.providers),
         'providers': li
     }
+
+    if args.repeat_input:
+        response.update({
+            'count': len(li),
+            'start': start,
+        })
+
+    return response
 
 
 def list_journals(args: argparse.Namespace, journal_registry: registry.Registry) -> Dict:
@@ -50,12 +56,18 @@ def list_journals(args: argparse.Namespace, journal_registry: registry.Registry)
         info.update(**j.provider.get_info())
         journals.append(info)
 
-    return {
-        'start': start,
-        'count': len(journals),
+    response = {
         'total': len(journal_registry.journals),
         'journals': journals
     }
+
+    if args.repeat_input:
+        response.update({
+            'count': len(journals),
+            'start': start,
+        })
+
+    return response
 
 
 def suggests(args: argparse.Namespace, journal_registry: registry.Registry) -> Dict:
@@ -65,17 +77,21 @@ def suggests(args: argparse.Namespace, journal_registry: registry.Registry) -> D
     """
 
     try:
-        return {
+        response = {
+            'suggestions': journal_registry.suggest_journals(args.q, args.source, args.count, args.cutoff)
+        }
+    except registry.RegistryError as e:
+        return make_error(e.what, e.var)
+
+    if args.repeat_input:
+        response.update({
             'request': args.q,
             'source': args.source,
             'count': args.count,
             'cutoff': args.cutoff,
-            'suggestions': journal_registry.suggest_journals(
-                args.q, args.source, args.count, args.cutoff
-            )
-        }
-    except registry.RegistryError as e:
-        return make_error(e.what, e.var)
+        })
+
+    return response
 
 
 def journal(args: argparse.Namespace, journal_registry: registry.Registry) -> Dict:
@@ -96,31 +112,35 @@ def journal(args: argparse.Namespace, journal_registry: registry.Registry) -> Di
 
 
 def get_info(args: argparse.Namespace, journal_registry: registry.Registry) -> Dict:
-    callback = journal_registry.get_url
+    """
+    :param args: Arguments
+    :param journal_registry: journal registry
+    """
 
+    callback = journal_registry.get_url
     if args.doi:
         callback = journal_registry.get_doi
+
     try:
-        return {
-            'request': {
-                'journal': args.journal,
-                'volume': args.volume,
-                'page': args.page,
-            },
-            'response': callback(
-                args.journal,
-                args.volume,
-                args.page
-            )
-        }
+        response = callback(args.journal, args.volume, args.page)
     except registry.RegistryError as e:
         return make_error(e.what, e.var)
+
+    if args.repeat_input:
+        response.update({
+            'journal': args.journal,
+            'volume': args.volume,
+            'page': args.page,
+        })
+
+    return response
 
 
 def get_arguments_parser():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + p_version)
-    parser.add_argument('-f', '--format', help='output format (json, yaml)', choices=('json', 'yaml'), default='json')
+    parser.add_argument('-f', '--format', help='output format (json, yaml)', choices=('json', 'yaml'), default='yaml')
+    parser.add_argument('-r', '--repeat-input', help='repeat input in the output', action='store_true')
 
     subparsers = parser.add_subparsers(dest='search_section', help='search section')
 
