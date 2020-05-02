@@ -95,6 +95,28 @@ def journal(args: argparse.Namespace, journal_registry: registry.Registry) -> Di
         return make_error('unknown journal', 'q')
 
 
+def get_info(args: argparse.Namespace, journal_registry: registry.Registry) -> Dict:
+    callback = journal_registry.get_url
+
+    if args.doi:
+        callback = journal_registry.get_doi
+    try:
+        return {
+            'request': {
+                'journal': args.journal,
+                'volume': args.volume,
+                'page': args.page,
+            },
+            'response': callback(
+                args.journal,
+                args.volume,
+                args.page
+            )
+        }
+    except registry.RegistryError as e:
+        return make_error(e.what, e.var)
+
+
 def get_arguments_parser():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + p_version)
@@ -132,6 +154,14 @@ def get_arguments_parser():
     parser_journal = subparsers.add_parser('journal')
     parser_journal.add_argument('q', help='journal name')
 
+    # get article url/doi
+    parser_get = subparsers.add_parser('get')
+    parser_get.add_argument('journal', help='full journal name')
+    parser_get.add_argument('volume', help='article volume')
+    parser_get.add_argument('page', help='article (starting) page')
+
+    parser_get.add_argument('-d', '--doi', help='get DOI instead of url (slower but safer)', action='store_true')
+
     return parser
 
 
@@ -163,6 +193,8 @@ def main():
         dumps(args, suggests(args, journal_registry))
     elif args.search_section == 'journal':
         dumps(args, journal(args, journal_registry))
+    elif args.search_section == 'get':
+        dumps(args, get_info(args, journal_registry))
 
 
 if __name__ == '__main__':
