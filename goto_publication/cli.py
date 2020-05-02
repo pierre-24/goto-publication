@@ -102,13 +102,16 @@ def journal(args: argparse.Namespace, journal_registry: registry.Registry) -> Di
 
     if args.q in journal_registry.journals:
         j = journal_registry.journals[args.q]
-        return {
+        response = {
             'journal': j.name,
             'abbreviation': j.abbr,
-            'provider': j.provider.get_info()
         }
+
+        response.update(**j.provider.get_info())
     else:
         return make_error('unknown journal', 'q')
+
+    return response
 
 
 def get_info(args: argparse.Namespace, journal_registry: registry.Registry) -> Dict:
@@ -160,8 +163,8 @@ def get_arguments_parser():
     parser_suggests.add_argument('q', help='query')
     parser_suggests.add_argument(
         '-S', '--source',
-        choices=('title', 'abbr'),
-        help='search in journal title (title) or abbreviation (abbr, default)',
+        choices=('name', 'abbr'),
+        help='search in journal title (name) or abbreviation (abbr, default)',
         default='abbr'
     )
     parser_suggests.add_argument('-c', '--count', help='Maximum number of results', type=int, default=10)

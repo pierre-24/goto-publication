@@ -1,7 +1,7 @@
 from typing import Any, Dict
+import iso4
 
 from goto_publication import providers
-import iso4
 
 
 class JournalError(Exception):
