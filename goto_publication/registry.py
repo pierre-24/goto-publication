@@ -1,3 +1,8 @@
+"""
+"high-level" API: a registry contains all providers and a list of all journals (coming from a YAML-formatted file),
+which it uses for suggestions, getting URL or DOI.
+"""
+
 from typing import List
 import yaml
 import difflib
@@ -18,28 +23,49 @@ class Registry:
 
     NUM_SUGGESTIONS = 10
 
-    def __init__(self, registry_path: str, providers_: List[providers.Provider]):
+    def __init__(self, providers_: List[providers.Provider], registry_path: str = None):
         # register the providers
         self.providers = {}
         self.registers(providers_)
 
         # get journals
-        self.registry_path = registry_path
-
-        with open(self.registry_path) as f:
-            journals_base = yaml.load(f, Loader=yaml.Loader)
-
         self.journals = {}
         self._suggs_name = {}
         self._suggs_abbr = {}
+
+        if registry_path is not None:
+            self.add_journals_from_registry(registry_path)
+
+    def add_journals_from_registry(self, registry_path) -> None:
+        """Add journals from the registry
+
+        :param registry_path: path to the registry (YAML formatted file)
+        :param skip_error: skip errors due to deserialization of multiple occurrence of the same journal
+        """
+
+        with open(registry_path) as f:
+            journals_base = yaml.load(f, Loader=yaml.Loader)
+
         for j in journals_base:
             try:
-                journal = jrnl.Journal.deserialize(j, self.providers[j['provider']])
-                self.journals[j['name']] = journal
-                self._suggs_name[journal.name.lower()] = journal
-                self._suggs_abbr[journal.abbr] = journal
-            except KeyError:
-                pass
+                j_deserialized = jrnl.Journal.deserialize(j, self.providers[j['provider']])
+                self.add_journal(j_deserialized)
+            except KeyError as e:
+                raise RegistryError(e.args[0], 'error while deserializing {}'.format(j))
+
+    def add_journal(self, journal: jrnl.Journal) -> None:
+        """Add a journal
+
+        :param journal: journal to add
+        :raise KeyError: if a journal with the same name already exists
+        """
+
+        if journal.name in self.journals:
+            raise RegistryError('name', 'journal {} is defined twice'.format(journal.name))
+
+        self.journals[journal.name] = journal
+        self._suggs_name[journal.name.lower()] = journal
+        self._suggs_abbr[journal.abbr] = journal
 
     def register(self, provider: providers.Provider):
         """Register a provider
@@ -87,6 +113,11 @@ class Registry:
 
     def get_url(self, journal: str, volume: str, page: str, **kwargs: dict) -> dict:
         """Get the URL
+
+        :param journal: journal name
+        :param volume: volume
+        :param page: (starting) page
+        :param kwargs: extra arguments
         """
 
         self._check_input(journal, volume, page, **kwargs)
@@ -103,6 +134,11 @@ class Registry:
 
     def get_doi(self, journal: str, volume: str, page: str, **kwargs: dict) -> dict:
         """Get the DOI
+
+        :param journal: journal name
+        :param volume: volume
+        :param page: (starting) page
+        :param kwargs: extra arguments
         """
 
         self._check_input(journal, volume, page, **kwargs)

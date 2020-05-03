@@ -8,7 +8,7 @@ import goto_publication
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, 'README.md')) as f:
+with open(path.join(here, 'README.rst')) as f:
     long_description = f.read()
 
 with open(path.join(here, 'requirements/requirements.in')) as f:
@@ -24,7 +24,7 @@ setup(
     # Description
     description=goto_publication.__doc__,
     long_description=long_description,
-    long_description_content_type='text/markdown',
+    long_description_content_type='text/rest',
 
     project_urls={
         'Bug Reports': 'https://github.com/pierre-24/goto-publication/issues',

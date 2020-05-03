@@ -6,6 +6,7 @@ from typing import List, Any
 import iso4
 import csv
 import io
+import urllib.parse
 
 from goto_publication import journal
 
@@ -27,10 +28,18 @@ API_KEY_FIELD = 'apiKey'
 
 
 class Provider:
-    CODE = ''
-    NAME = ''
-    WEBSITE_URL = ''  # !! please add trailing slash
-    ICON_URL = ''
+    """
+    Represent a provider (= editor), which provides journals.
+    Contains methods to retrieve the URL and DOI of an an article, given its internal identifier, volume and page.
+    There is also a method to retrieve a list of all journals, if possible.
+
+    A provider is identified by its ``CODE`` in the registry.
+    """
+
+    CODE = ''  #: identifier
+    NAME = ''  #: full name
+    WEBSITE_URL = ''  #: URL (**please add a trailing slash**)
+    ICON_URL = ''  #: Favicon for an eventual graphical output
 
     API_KEY_KWARG = False
 
@@ -43,13 +52,17 @@ class Provider:
 
         return {
             'providerName': self.NAME,
-            'providerIcon': self.ICON_URL,
             'providerWebsite': self.WEBSITE_URL,
         }
 
     def get_url(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
         """Get an url that go close to the actual article (a search page with the form filled, or in the
         best cases, the actual article).
+
+        :param journal_identifier: internal journal identifier (that the provider uses)
+        :param volume: volume
+        :param page: (starting) page
+        :param kwargs: extra arguments
 
         Normally, this is fast, because most of the time the link is forged without any request.
         On the other hand, there is no check, so it is not guaranteed to link to an actual article.
@@ -60,6 +73,11 @@ class Provider:
     def get_doi(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
         """Get the DOI of the article.
 
+        :param journal_identifier: internal journal identifier (that the provider uses)
+        :param volume: volume
+        :param page: (starting) page
+        :param kwargs: extra arguments
+
         Slower than `get_url()`, because some requests are made. But the DOI is guaranteed to be exact.
         """
 
@@ -67,7 +85,8 @@ class Provider:
 
     def get_journals(self, **kwargs: dict) -> List[journal.Journal]:
         """Retrieve, at **any** cost, a list of the journals of this provider.
-        :param **kwargs:
+
+        :param kwargs: extra arguments
         """
 
         raise NotImplementedError()
@@ -96,8 +115,6 @@ class ACS(Provider):
             self.session.close()
 
     def _get_url(self, journal_identifiers: str, volume: [str, int], page: str, **kwargs: dict) -> str:
-        """Requires no request
-        """
 
         return self.base_url + '?quickLinkJournal={j}&quickLinkVolume={v}&quickLinkPage={p}&quickLink=true'.format(
             j=journal_identifiers, v=volume, p=page)
@@ -120,9 +137,13 @@ class ACS(Provider):
         return self.doi_regex.search(result.headers['Location']).group(1)
 
     def get_url(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
+        """Forged from the citation search: requires no request"""
+
         return self._get_url(journal_identifier, volume, page, **kwargs)
 
     def get_journals(self, **kwargs: dict) -> List[journal.Journal]:
+        """Use the list of journals found on the index
+        """
         result = self.session.get(self.WEBSITE_URL)
         if result.status_code != 200:
             raise NoJournalList()
@@ -153,14 +174,14 @@ class APS(Provider):
     base_url = WEBSITE_URL + '{j1}/abstract/' + DOI
 
     def get_url(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
-        """Infers the article URL base on the way it is written (which is surprisingly easy).
-        """
+        """Forged: requires no request"""
 
         return self.base_url.format(j1=journal_identifier[0], j2=journal_identifier[1], v=volume, p=page)
 
     def get_doi(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
         """Only checks that the url gives a 200 response. If so, the DOI is valid.
         """
+
         url = self.get_url(journal_identifier, volume, page, **kwargs)
         response = requests.get(url)
         if response.status_code != 200:
@@ -169,6 +190,7 @@ class APS(Provider):
         return self.DOI.format(j2=journal_identifier[1], v=volume, p=page)
 
     def get_journals(self, **kwargs: dict) -> List[journal.Journal]:
+        """Use https://journals.aps.org/about."""
 
         response = requests.get(self.WEBSITE_URL + 'about')
         soup = BeautifulSoup(response.content, 'lxml')
@@ -201,9 +223,14 @@ class AIP(ACS):
     base_url = WEBSITE_URL + 'action/quickLink'
 
     def get_url(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
+        """Forged: requires no request"""
+
         return self._get_url(journal_identifier, volume, page, **kwargs)
 
     def get_journals(self, **kwargs: dict) -> List[journal.Journal]:
+        """Use the list of journal found on the index page
+        """
+
         result = self.session.get(self.WEBSITE_URL)
         if result.status_code != 200:
             raise NoJournalList()
@@ -231,10 +258,13 @@ class IOP(Provider):
     doi_regex = re.compile(r'article/(.*/.*/.*)\?')
 
     def get_url(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
+        """Forged: requires no request"""
+
         return self.base_url + '?CF_JOURNAL={}&CF_VOLUME={}&CF_ISSUE=&CF_PAGE={}'.format(
             journal_identifier, volume, page)
 
     def get_doi(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
+        """Requires one request."""
         url = self.get_url(journal_identifier, volume, page, **kwargs)
 
         result = requests.get(url, allow_redirects=False, headers={'User-Agent': 'tmp'})
@@ -244,6 +274,8 @@ class IOP(Provider):
         return self.doi_regex.search(result.headers['Location']).group(1)
 
     def get_journals(self, **kwargs: dict) -> List[journal.Journal]:
+        """Based on the list found at https://iopscience.iop.org/journalList (requires an user-agent).
+        """
         result = requests.get(self.WEBSITE_URL + 'journalList', headers={'User-Agent': 'tmp'})
         if result.status_code != 200:
             raise NoJournalList()
@@ -273,13 +305,15 @@ class Nature(Provider):
     base_url = WEBSITE_URL + 'search'
 
     def get_url(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
+        """Forged based on the search form: requires no request."""
+
         url = self.base_url + '?journal_identifier={}&volume={}&spage={}'.format(
             journal_identifier, volume, page)
 
         return url
 
     def get_doi(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
-        """Requires a request"""
+        """Requires a single request"""
 
         url = self.get_url(journal_identifier, volume, page, **kwargs)
         result = requests.get(url)
@@ -297,6 +331,9 @@ class Nature(Provider):
         return links[0].attrs['href'].replace('/articles', self.DOI_BASE)
 
     def get_journals(self, **kwargs: dict) -> List[journal.Journal]:
+        """Based on a JSON output found in the "advanced search" form
+        """
+
         results = requests.get(self.base_url + '/journal_name?xhr=true&journals=')
 
         journals = []
@@ -323,15 +360,15 @@ class RSC(Provider):
     search_result_url = WEBSITE_URL + 'en/search/journalresult'
 
     def get_url(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
+        """Forged based on the search form: requires no request"""
+
         url = self.search_url + '?artrefjournalname={}&artrefvolumeyear={}&artrefstartpage={}&fcategory=journal'.format(
             journal_identifier, volume, page)
 
         return url
 
     def get_doi(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
-        """Requires 2 (!) requests.
-
-        Note: for some reasons, an user-agent is mandatory
+        """Requires 2 requests. An user-agent is mandatory.
         """
 
         url = self.get_url(journal_identifier, volume, page)
@@ -358,6 +395,9 @@ class RSC(Provider):
         return links[0].attrs['href'][16:]
 
     def get_journals(self, **kwargs: dict) -> List[journal.Journal]:
+        """Based on the list found at https://pubs.rsc.org/en/Journals. Need an user-agent.
+        """
+
         result = requests.get(self.WEBSITE_URL + 'en/Journals', headers={'User-Agent': 'tmp'})
         soup = BeautifulSoup(result.content, 'lxml')
 
@@ -376,7 +416,7 @@ class RSC(Provider):
 class ScienceDirect(Provider):
     """Science Direct (Elsevier).
 
-    No DOI provided.
+    No DOI provided. I advice you to use the API if possible.
     """
 
     NAME = 'ScienceDirect'
@@ -395,7 +435,10 @@ class ScienceDirect(Provider):
             self.DISCIPLINES = concepts
 
     def get_url(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
-        return self.base_url + '?pub={}&volume={}&page={}'.format(journal_identifier, volume, page)
+        """Forged based on research: requires no request
+        """
+        return self.base_url + '?pub={}&volume={}&page={}'.format(
+            urllib.parse.quote_plus(journal_identifier), volume, page)
 
 
 class ScienceDirectAPI(ScienceDirect):
@@ -441,6 +484,9 @@ class ScienceDirectAPI(ScienceDirect):
         return response.json()
 
     def get_doi(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
+        """
+        Use the API in one single request.
+        """
         results = self._sd_api_call({
             'title': '*',
             'pub': journal_identifier,
@@ -485,7 +531,9 @@ class ScienceDirectAPI(ScienceDirect):
         return response.json()['serial-metadata-response']
 
     def get_journals(self, **kwargs: dict) -> List[journal.Journal]:
-        """Assumption: by looking for "volume 1, page 1", I'm getting every first page of every journal.
+        """
+        Use the API.
+        Assumption: by looking for "volume 1, page 1", one gets every first page of every journal.
         """
 
         journals = []
@@ -548,7 +596,8 @@ class Springer(Provider):
         return self.base_url + '/{}/volume/{}/toc'.format(journal_identifier, volume)
 
     def get_journals(self, **kwargs: dict) -> List[journal.Journal]:
-        """... On the other hand, they have a CSV output for the research!"""
+        """Get the journal based on their search form. Use the CSV output (that was unexpected!).
+        """
 
         journals = []
 
@@ -597,7 +646,7 @@ class Wiley(Provider):
             self.session.close()
 
     def get_url(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
-        """Require a single request to get the url (which contains the DOI)
+        """Require a single request to get the url (which contains the DOI).
         """
 
         url = self.api_url + '?citationJournal[]={j}&citationVolume={v}&citationPage={p}'.format(
@@ -615,6 +664,9 @@ class Wiley(Provider):
         return self.WEBSITE_URL + j['link'][1:]
 
     def get_doi(self, journal_identifier: Any, volume: [str, int], page: str, **kwargs: dict) -> str:
+        """The DOI is actually found in the URL, so requires one single request as well.
+        """
+
         result_url = self.get_url(journal_identifier, volume, page)
         p = result_url.find('abs/')
         if p == -1:
@@ -623,6 +675,10 @@ class Wiley(Provider):
         return result_url[p + 4:]
 
     def get_journals(self, **kwargs: dict) -> List[journal.Journal]:
+        """Get the list from https://onlinelibrary.wiley.com/action/showPublications.
+        Since the list is actually long (and the request takes longer if the pages are large),
+        fetch the results 50 by 50 (I didn't try to optimize that).
+        """
 
         page_size = 50
         journals = []

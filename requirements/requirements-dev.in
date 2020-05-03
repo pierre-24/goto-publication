@@ -2,3 +2,6 @@
 flake8
 flake8-quotes
 autopep8
+sphinx
+sphinxcontrib-programoutput
+sphinx_rtd_theme
