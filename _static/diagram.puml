@@ -1,0 +1,38 @@
+@startuml
+
+class Journal {
+    name: str
+    identifier: str
+    abbr: str
+    +serialize()
+    +get_url()
+    +get_doi()
+}
+
+Journal  -- "provider" Provider: provide <
+
+class Provider {
+    {static} CODE: str
+    {static} NAME: str
+    {static} WEBSITE_URL: str
+    {static} ICON_URL: str
+    +get_url()
+    +get_doi()
+    +get_journals()
+}
+
+class Registry {
+    +get_url()
+    +get_doi()
+    +suggest_journals()
+    +add_journals_from_registry()
+}
+
+Registry --right "journals [0..*]" Journal: contains >
+Registry -- "providers [0..*]" Provider: uses >
+
+Springer --|> Registry
+Wiley --|> Registry
+Whatever  --|> Registry
+
+@enduml

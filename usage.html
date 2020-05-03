@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Usage &mdash; goto_publication  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing" href="contributing.html" />
+    <link rel="prev" title="Installing" href="installing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> goto_publication
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#preamble-why">Preamble: why ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#detailed-usage">Detailed usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-article-info">Get article info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#suggest-journals">Suggest journals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#registry-content">Registry content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-providers">List providers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api-providers.html">Providers</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">goto_publication</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Usage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="preamble-why">
+<h2>Preamble: why ?<a class="headerlink" href="#preamble-why" title="Permalink to this headline">¶</a></h2>
+<p>Modern article’s PDFs generally includes DOI and even sometimes direct link to redirect you to that article you find interesting in the reference section.
+Old articles generally dont, which requires to check on Google (or other) what is the website of the journal, then go into some <em>citation search</em> form (if it ever exists).</p>
+<p>The goal here is to ease this process by providing a tool to perform <strong>citation search</strong>.
+It is reduced to 3 (sometimes 4) components:</p>
+<ul class="simple">
+<li><p>The journal <strong>name</strong> ;</p></li>
+<li><p>The <strong>volume</strong> ;</p></li>
+<li><p>The (starting) <strong>page</strong> or <strong>article number</strong> in some journal ;</p></li>
+<li><p>And, yeah, sometimes, the <strong>issue</strong> is required.</p></li>
+</ul>
+<p>In the following, only the 3 first information are required:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> goto-publication get <span class="s2">&quot;Nature&quot;</span> <span class="m">227</span> <span class="m">680</span> --doi
+<span class="go">doi: 10.1038/227680a0</span>
+<span class="go">providerIcon: https://www.nature.com/favicon.ico</span>
+<span class="go">providerName: Nature</span>
+<span class="go">providerWebsite: https://www.nature.com/</span>
+<span class="go">url: https://dx.doi.org/10.1038/227680a0</span>
+</pre></div>
+</div>
+<p>Note that there is two way to retrieve the information about an article:</p>
+<ul class="simple">
+<li><p>By its <strong>url</strong>: this is the default and (usually) fastest way.
+In fact the goal is to take you as far as possible in the process in the less internet request possible.
+Sometimes, when <em>citation search</em> results in a predictible URL, no request is even needed.
+On the other hand, <strong>there is no guarantee that the article exists</strong>.</p></li>
+<li><p>By its <strong>DOI</strong>: this is slower, but safer.
+This time, by performing as many requests as needed (generally 2 or 3, don’t worry), the DOI that you’ll get is guaranteed to be exact (otherwise, <em>not found</em> is reported).
+In the example above, the DOI was requested, and this is in fact the true DOI of <a class="reference external" href="https://dx.doi.org/10.1038/227680a0">this article</a>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A quick vocabulary fix:</p>
+<ul class="simple">
+<li><p>A <strong>provider</strong> (= editor) provide different <strong>journals</strong>, which contains articles</p></li>
+<li><p>Each journal is stored in a <strong>registry</strong>.</p></li>
+<li><p>A journal has a <strong>name</strong> (= title) and an abbreviation (which normally follows the <a class="reference external" href="https://en.wikipedia.org/wiki/ISO_4">ISO 4 convention</a>).</p></li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The program comes with its own registry, which is a chemistry + physics oriented (since I’m the primary user of this tool).
+You can change that (see below), but it is currently not easy and well documented (future release will definitely fix that).</p>
+</div>
+</div>
+<div class="section" id="detailed-usage">
+<h2>Detailed usage<a class="headerlink" href="#detailed-usage" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: goto-publication [-h] [-v] [-f {json,yaml}] [-r] [-J JOURNAL_REGISTRY]
+                        {providers,journals,suggest,journal,get} ...
+
+positional arguments:
+  {providers,journals,suggest,journal,get}
+                        search section
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --version         show program&#39;s version number and exit
+  -f {json,yaml}, --format {json,yaml}
+                        output format (json, yaml)
+  -r, --repeat-input    repeat input in the output
+  -J JOURNAL_REGISTRY, --journal-registry JOURNAL_REGISTRY
+                        path to the journal registry
+</pre></div>
+</div>
+<p>By default, the program outputs <a class="reference external" href="https://yaml.org/spec/1.2/spec.html">YAML</a>, which is human friendly.
+You can change this output format (for example if you need to use it in scripts further scripts) into JSON (with <code class="docutils literal notranslate"><span class="pre">-f</span> <span class="pre">json</span></code>).</p>
+<p>You can also select your own journal registry with  <code class="docutils literal notranslate"><span class="pre">-J</span></code>.</p>
+<div class="section" id="get-article-info">
+<h3>Get article info<a class="headerlink" href="#get-article-info" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Legal stuffs</strong></p>
+<p>Don’t forget that this results in real requests.
+Of course, the amount of request you need to make before getting ban by any editor is large, but a ban (even temporary) is probably not what you are looking for.
+Thus, don’t try to use this to automate scraping.
+Even if you are not using the editor website in your browser, think as this as being the same: <strong>the website policy still apply</strong>.</p>
+<p>But don’t worry, if you use this normally, nothing should happen :)</p>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: goto-publication get [-h] [-d] journal volume page
+
+positional arguments:
+  journal     full journal name
+  volume      article volume
+  page        article (starting) page
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -d, --doi   get DOI instead of url (slower but safer)
+</pre></div>
+</div>
+<p>Get info about an article: retrieve either its DOI (with <code class="docutils literal notranslate"><span class="pre">--DOI</span></code>) or its URL (see previous section).</p>
+<p>For the moment, you need to give the <strong>exact journal name</strong>, as found in the registry (see below for suggestions).
+That will be fix’d in future releases.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">goto-publication</span></code> takes advantage of the <a class="reference external" href="https://dev.elsevier.com/index.html">Elsevier API</a>, which requires a key.
+By default, you are limited to URL:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> goto-publication get <span class="s1">&#39;Chemical Physics&#39;</span> <span class="m">493</span> <span class="m">200</span>
+<span class="go">providerName: ScienceDirect (API)</span>
+<span class="go">providerWebsite: https://www.sciencedirect.com/</span>
+<span class="go">url: https://www.sciencedirect.com/search/advanced?pub=Chemical+Physics&amp;volume=493&amp;page=200</span>
+<span class="gp">$</span> goto-publication get <span class="s1">&#39;Chemical Physics&#39;</span> <span class="m">493</span> <span class="m">200</span> --doi
+<span class="go">message:</span>
+<span class="go">  journal: Not yet implemented (Chemical Physics [sd])</span>
+</pre></div>
+</div>
+<p>But if you have an API key, you can set the environement variable <code class="docutils literal notranslate"><span class="pre">$SD_API_KEY</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">export</span> <span class="nv">SD_API_KEY</span><span class="o">=</span>xxxxxxxxxxxxxxxxxxxx
+<span class="gp">$</span> goto-publication get <span class="s1">&#39;Chemical Physics&#39;</span> <span class="m">493</span> <span class="m">200</span> --doi
+<span class="go">doi: 10.1016/j.chemphys.2017.04.003</span>
+<span class="go">providerName: ScienceDirect (API)</span>
+<span class="go">providerWebsite: https://www.sciencedirect.com/</span>
+<span class="go">url: https://dx.doi.org/10.1016/j.chemphys.2017.04.003</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="suggest-journals">
+<h3>Suggest journals<a class="headerlink" href="#suggest-journals" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: goto-publication suggest [-h] [-S {name,abbr}] [-c COUNT] [-C CUTOFF] q
+
+positional arguments:
+  q                     query
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -S {name,abbr}, --source {name,abbr}
+                        search in journal title (name) or abbreviation (abbr,
+                        default)
+  -c COUNT, --count COUNT
+                        Maximum number of results
+  -C CUTOFF, --cutoff CUTOFF
+                        Severity cutoff on the results (must be between 0 and
+                        1, the larger, the severer)
+</pre></div>
+</div>
+<p>Suggest a list of journal names based on the (partial) journal abbreviation (<code class="docutils literal notranslate"><span class="pre">-S</span> <span class="pre">abbr</span></code>, default) or title (<code class="docutils literal notranslate"><span class="pre">-S</span> <span class="pre">name</span></code>), sorted by similarity.</p>
+<p>Count (<code class="docutils literal notranslate"><span class="pre">-c</span></code>) and cutoff (<code class="docutils literal notranslate"><span class="pre">-C</span></code>, between 0 and 1) are used to change the scope of the search.
+The latter restrict the minimal amount of similarity required (<a class="reference external" href="https://docs.python.org/3.7/library/difflib.html#difflib.get_close_matches">see underlying function</a>), while the first restrict the number of results.</p>
+<p>Examples:</p>
+<ul>
+<li><p>Search per abbreviation:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> goto-publication suggest <span class="s2">&quot;J am chem soc&quot;</span> -c <span class="m">5</span>
+<span class="go">suggestions:</span>
+<span class="go">- Journal of the American Chemical Society</span>
+<span class="go">- Journal of the Iranian Chemical Society</span>
+<span class="go">- Journal of Chemical Documentation</span>
+<span class="go">- Journal of the American Oil Chemists&#39; Society</span>
+<span class="go">- Journal of the Chinese Chemical Society</span>
+</pre></div>
+</div>
+</li>
+<li><p>Search per name</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> goto-publication suggest <span class="s2">&quot;journal american chemical&quot;</span> -S name -c <span class="m">5</span>
+<span class="go">suggestions:</span>
+<span class="go">- Journal of the American Chemical Society</span>
+<span class="go">- Journal of Materials Chemistry C</span>
+<span class="go">- Journal of Materials Chemistry A</span>
+<span class="go">- Journal of Medicinal Chemistry</span>
+<span class="go">- Journal of the American Ceramic Society</span>
+</pre></div>
+</div>
+</li>
+<li><p>Change the cutoff (default is <code class="docutils literal notranslate"><span class="pre">-C</span> <span class="pre">0.6</span></code>):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> goto-publication suggest <span class="s2">&quot;journal american chemical&quot;</span> -S name -c <span class="m">5</span> -C <span class="m">0</span>.7
+<span class="go">suggestions:</span>
+<span class="go">- Journal of the American Chemical Society</span>
+<span class="go">- Journal of Materials Chemistry C</span>
+<span class="go">- Journal of Materials Chemistry A</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="registry-content">
+<h3>Registry content<a class="headerlink" href="#registry-content" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: goto-publication journals [-h] [-s START] [-c COUNT]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s START, --start START
+                        result offset
+  -c COUNT, --count COUNT
+                        Maximum number of results
+</pre></div>
+</div>
+<p>List the journals as found in the registry.
+<code class="docutils literal notranslate"><span class="pre">-c</span></code> and <code class="docutils literal notranslate"><span class="pre">-s</span></code> allow to change the number and start.
+For example, to get journal from 3 to 6,</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> goto-publication journals -c <span class="m">3</span> -s <span class="m">2</span>
+<span class="go">journals:</span>
+<span class="go">- abbreviation: ACS Appl Electron Mater</span>
+<span class="go">  journal: ACS Applied Electronic Materials</span>
+<span class="go">  providerName: American Chemical Society</span>
+<span class="go">  providerWebsite: https://pubs.acs.org/</span>
+<span class="go">- abbreviation: ACS Appl Energy Mater</span>
+<span class="go">  journal: ACS Applied Energy Materials</span>
+<span class="go">  providerName: American Chemical Society</span>
+<span class="go">  providerWebsite: https://pubs.acs.org/</span>
+<span class="go">- abbreviation: ACS Appl Mater  Interface</span>
+<span class="go">  journal: ACS Applied Materials &amp; Interfaces</span>
+<span class="go">  providerName: American Chemical Society</span>
+<span class="go">  providerWebsite: https://pubs.acs.org/</span>
+<span class="go">total: 1378</span>
+</pre></div>
+</div>
+<p>Note that there was a total of 1378 journal in the registry.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Most of the abbreviation are auto-generated from the name, so it is probably not exact.</p>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: goto-publication journal [-h] q
+
+positional arguments:
+  q           journal name
+
+optional arguments:
+  -h, --help  show this help message and exit
+</pre></div>
+</div>
+<p>Given the <strong>exact journal name</strong>, gives a few information about it as found in the registry.
+For example,</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> goto-publication journal <span class="s2">&quot;Journal of the American Chemical Society&quot;</span>
+<span class="go">abbreviation: J Am Chem Soc</span>
+<span class="go">journal: Journal of the American Chemical Society</span>
+<span class="go">providerName: American Chemical Society</span>
+<span class="go">providerWebsite: https://pubs.acs.org/</span>
+</pre></div>
+</div>
+<p>It is the same information as above but for one single journal.</p>
+</div>
+<div class="section" id="list-providers">
+<h3>List providers<a class="headerlink" href="#list-providers" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: goto-publication providers [-h] [-s START] [-c COUNT]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s START, --start START
+                        result offset
+  -c COUNT, --count COUNT
+                        Maximum number of results
+</pre></div>
+</div>
+<p>List the different <a class="reference external" href="api-providers.html">providers</a> that the program handles, ordered alphabetically.
+Again, <code class="docutils literal notranslate"><span class="pre">-c</span></code> and <code class="docutils literal notranslate"><span class="pre">-s</span></code> allows to navigate through the list.
+For example,</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> goto-publication providers -c <span class="m">3</span>
+<span class="go">providers:</span>
+<span class="go">- providerName: American Chemical Society</span>
+<span class="go">  providerWebsite: https://pubs.acs.org/</span>
+<span class="go">- providerName: American Physical Society</span>
+<span class="go">  providerWebsite: https://journals.aps.org/</span>
+<span class="go">- providerName: American Institute of Physics (AIP)</span>
+<span class="go">  providerWebsite: https://aip.scitation.org/</span>
+<span class="go">total: 9</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installing.html" class="btn btn-neutral float-left" title="Installing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Pierre Beaujean
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

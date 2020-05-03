@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>goto-publication &mdash; goto_publication  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installing" href="installing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> goto_publication
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api-providers.html">Providers</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">goto_publication</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>goto-publication</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="goto-publication">
+<h1>goto-publication<a class="headerlink" href="#goto-publication" title="Permalink to this headline">¶</a></h1>
+<div class="figure align-center">
+<a class="reference external image-reference" href="https://pierre-24.github.io/goto-publication/"><img alt="https://pierre-24.github.io/goto-publication/_static/logo.svg" src="https://pierre-24.github.io/goto-publication/_static/logo.svg" /></a>
+</div>
+<a class="reference external image-reference" href="https://travis-ci.org/pierre-24/goto-publication"><img alt="https://travis-ci.org/pierre-24/goto-publication.svg?branch=dev" src="https://travis-ci.org/pierre-24/goto-publication.svg?branch=dev" /></a>
+<p><em>Citation-based URL/DOI searches</em>, by <a class="reference external" href="https://pierrebeaujean.net">Pierre Beaujean</a>.
+CLI version of <a class="reference external" href="https://github.com/pierre-24/goto-publication-old/">that previous project</a>.</p>
+<p>Because the journal, the volume and the page (and, sometimes, yeah, the issue) should be enough to find an article (for which, of course, you don’t have the DOI).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since I have a (quantum) chemistry background, I will limit this project to the journals that are in the chemistry and physics fields.
+I’m working on that, but feel free to propose <a class="reference external" href="https://github.com/pierre-24/goto-publication/pulls">improvements</a>.</p>
+</div>
+<div class="section" id="installation-and-usage">
+<h2>Installation and usage<a class="headerlink" href="#installation-and-usage" title="Permalink to this headline">¶</a></h2>
+<p>If you want to use goto-publication, just install it through <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip3 install git+https://github.com/pierre-24/goto-publication.git@dev
+</pre></div>
+</div>
+<p>Then, you can get the url directing to an article, by:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> goto-publication get <span class="s2">&quot;Nature&quot;</span> <span class="m">227</span> <span class="m">680</span>
+<span class="go">providerIcon: https://www.nature.com/favicon.ico</span>
+<span class="go">providerName: Nature</span>
+<span class="go">providerWebsite: https://www.nature.com/</span>
+<span class="go">url: https://www.nature.com/search?journal_identifier=nature&amp;volume=227&amp;spage=680</span>
+</pre></div>
+</div>
+<p>which links to <a class="reference external" href="https://www.nature.com/articles/227680a0">this article</a></p>
+<p>Or directly (but it is slower) its DOI:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> goto-publication get <span class="s2">&quot;Nature&quot;</span> <span class="m">227</span> <span class="m">680</span> --doi
+<span class="go">doi: 10.1038/227680a0</span>
+<span class="go">providerIcon: https://www.nature.com/favicon.ico</span>
+<span class="go">providerName: Nature</span>
+<span class="go">providerWebsite: https://www.nature.com/</span>
+<span class="go">url: https://dx.doi.org/10.1038/227680a0</span>
+</pre></div>
+</div>
+<p>In the documentation, you can find more information about the <a class="reference external" href="https://pierre-24.github.io/goto-publication/installing.html">installation</a>  (also for contributors) and the <a class="reference external" href="https://pierre-24.github.io/goto-publication/usage.html">usage of the different commands</a>.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#if-you-just-want-to-use-goto-publication">If you just want to use <code class="docutils literal notranslate"><span class="pre">goto-publication</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#if-you-want-to-contribute">If you want to contribute</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#preamble-why">Preamble: why ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#detailed-usage">Detailed usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#design-rules">Design rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#workflow">Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-goto_publication.journal">Journals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#providers">Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-goto_publication.registry">Registry</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-providers.html">Providers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api-providers.html#acs">ACS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-providers.html#aps">APS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-providers.html#aip">AIP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-providers.html#iop">IOP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-providers.html#nature">Nature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-providers.html#rsc">RSC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-providers.html#sciencedirect">ScienceDirect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-providers.html#sciencedirect-api">ScienceDirect (API)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-providers.html#springer">Springer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-providers.html#wiley">Wiley</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="installing.html" class="btn btn-neutral float-right" title="Installing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Pierre Beaujean
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

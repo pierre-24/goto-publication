@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Providers &mdash; goto_publication  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="API" href="api.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> goto_publication
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Providers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#acs">ACS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#aps">APS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#aip">AIP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iop">IOP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nature">Nature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rsc">RSC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sciencedirect">ScienceDirect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sciencedirect-api">ScienceDirect (API)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#springer">Springer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wiley">Wiley</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">goto_publication</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Providers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api-providers.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="providers">
+<h1>Providers<a class="headerlink" href="#providers" title="Permalink to this headline">¶</a></h1>
+<p>Documentation of the different providers.
+The parent class is documented <a class="reference external" href="api.html#goto_publication.providers.Provider">there</a>.</p>
+<div class="section" id="acs">
+<h2>ACS<a class="headerlink" href="#acs" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="goto_publication.providers.ACS">
+<em class="property">class </em><code class="sig-prename descclassname">goto_publication.providers.</code><code class="sig-name descname">ACS</code><a class="headerlink" href="#goto_publication.providers.ACS" title="Permalink to this definition">¶</a></dt>
+<dd><p>American chemical society. Their API is very close to the AIP one (except there is journal_identifier codes).</p>
+<dl class="py method">
+<dt id="goto_publication.providers.ACS.get_doi">
+<code class="sig-name descname">get_doi</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.ACS.get_doi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Requires a request, and eventually a second to set up the cookies.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.ACS.get_journals">
+<code class="sig-name descname">get_journals</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="api.html#goto_publication.journal.Journal" title="goto_publication.journal.Journal">goto_publication.journal.Journal</a><span class="p">]</span><a class="headerlink" href="#goto_publication.providers.ACS.get_journals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the list of journals found on the index</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.ACS.get_url">
+<code class="sig-name descname">get_url</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.ACS.get_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forged from the citation search: requires no request</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="aps">
+<h2>APS<a class="headerlink" href="#aps" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="goto_publication.providers.APS">
+<em class="property">class </em><code class="sig-prename descclassname">goto_publication.providers.</code><code class="sig-name descname">APS</code><a class="headerlink" href="#goto_publication.providers.APS" title="Permalink to this definition">¶</a></dt>
+<dd><p>American Physical Society</p>
+<dl class="py method">
+<dt id="goto_publication.providers.APS.get_doi">
+<code class="sig-name descname">get_doi</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.APS.get_doi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Only checks that the url gives a 200 response. If so, the DOI is valid.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.APS.get_journals">
+<code class="sig-name descname">get_journals</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="api.html#goto_publication.journal.Journal" title="goto_publication.journal.Journal">goto_publication.journal.Journal</a><span class="p">]</span><a class="headerlink" href="#goto_publication.providers.APS.get_journals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use <a class="reference external" href="https://journals.aps.org/about">https://journals.aps.org/about</a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.APS.get_url">
+<code class="sig-name descname">get_url</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.APS.get_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forged: requires no request</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="aip">
+<h2>AIP<a class="headerlink" href="#aip" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="goto_publication.providers.AIP">
+<em class="property">class </em><code class="sig-prename descclassname">goto_publication.providers.</code><code class="sig-name descname">AIP</code><a class="headerlink" href="#goto_publication.providers.AIP" title="Permalink to this definition">¶</a></dt>
+<dd><p>American Institute of Physics</p>
+<dl class="py method">
+<dt id="goto_publication.providers.AIP.get_journals">
+<code class="sig-name descname">get_journals</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="api.html#goto_publication.journal.Journal" title="goto_publication.journal.Journal">goto_publication.journal.Journal</a><span class="p">]</span><a class="headerlink" href="#goto_publication.providers.AIP.get_journals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the list of journal found on the index page</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.AIP.get_url">
+<code class="sig-name descname">get_url</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.AIP.get_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forged: requires no request</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="iop">
+<h2>IOP<a class="headerlink" href="#iop" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="goto_publication.providers.IOP">
+<em class="property">class </em><code class="sig-prename descclassname">goto_publication.providers.</code><code class="sig-name descname">IOP</code><a class="headerlink" href="#goto_publication.providers.IOP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Institute of Physics (IOP)</p>
+<dl class="py method">
+<dt id="goto_publication.providers.IOP.get_doi">
+<code class="sig-name descname">get_doi</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.IOP.get_doi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Requires one request.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.IOP.get_journals">
+<code class="sig-name descname">get_journals</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="api.html#goto_publication.journal.Journal" title="goto_publication.journal.Journal">goto_publication.journal.Journal</a><span class="p">]</span><a class="headerlink" href="#goto_publication.providers.IOP.get_journals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Based on the list found at <a class="reference external" href="https://iopscience.iop.org/journalList">https://iopscience.iop.org/journalList</a> (requires an user-agent).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.IOP.get_url">
+<code class="sig-name descname">get_url</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.IOP.get_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forged: requires no request</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="nature">
+<h2>Nature<a class="headerlink" href="#nature" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="goto_publication.providers.Nature">
+<em class="property">class </em><code class="sig-prename descclassname">goto_publication.providers.</code><code class="sig-name descname">Nature</code><a class="headerlink" href="#goto_publication.providers.Nature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Even though they have an OpenSearch API (<a class="reference external" href="https://www.nature.com/opensearch/">https://www.nature.com/opensearch/</a>), not
+everything seems to be indexed in it (not much of Nature for years &lt; 2010, for example).</p>
+<p>Therefore, this one will rely on the search page.</p>
+<dl class="py method">
+<dt id="goto_publication.providers.Nature.get_doi">
+<code class="sig-name descname">get_doi</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.Nature.get_doi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Requires a single request</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.Nature.get_journals">
+<code class="sig-name descname">get_journals</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="api.html#goto_publication.journal.Journal" title="goto_publication.journal.Journal">goto_publication.journal.Journal</a><span class="p">]</span><a class="headerlink" href="#goto_publication.providers.Nature.get_journals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Based on a JSON output found in the “advanced search” form</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.Nature.get_url">
+<code class="sig-name descname">get_url</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.Nature.get_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forged based on the search form: requires no request.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="rsc">
+<h2>RSC<a class="headerlink" href="#rsc" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="goto_publication.providers.RSC">
+<em class="property">class </em><code class="sig-prename descclassname">goto_publication.providers.</code><code class="sig-name descname">RSC</code><a class="headerlink" href="#goto_publication.providers.RSC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Royal society of Chemistry</p>
+<p>No trace of an API, but a painful two-request process to get any result:
+the actual result page takes a long (mostly base64) payload as POST input, but this payload cannot be forged in
+advance (it seems to contain, at least, some information on the system which generates it).</p>
+<dl class="py method">
+<dt id="goto_publication.providers.RSC.get_doi">
+<code class="sig-name descname">get_doi</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.RSC.get_doi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Requires 2 requests. An user-agent is mandatory.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.RSC.get_journals">
+<code class="sig-name descname">get_journals</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="api.html#goto_publication.journal.Journal" title="goto_publication.journal.Journal">goto_publication.journal.Journal</a><span class="p">]</span><a class="headerlink" href="#goto_publication.providers.RSC.get_journals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Based on the list found at <a class="reference external" href="https://pubs.rsc.org/en/Journals">https://pubs.rsc.org/en/Journals</a>. Need an user-agent.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.RSC.get_url">
+<code class="sig-name descname">get_url</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.RSC.get_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forged based on the search form: requires no request</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="sciencedirect">
+<h2>ScienceDirect<a class="headerlink" href="#sciencedirect" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="goto_publication.providers.ScienceDirect">
+<em class="property">class </em><code class="sig-prename descclassname">goto_publication.providers.</code><code class="sig-name descname">ScienceDirect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">concepts</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goto_publication.providers.ScienceDirect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Science Direct (Elsevier).</p>
+<p>No DOI provided. I advice you to use the API if possible.</p>
+<dl class="py method">
+<dt id="goto_publication.providers.ScienceDirect.get_url">
+<code class="sig-name descname">get_url</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.ScienceDirect.get_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forged based on research: requires no request</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="sciencedirect-api">
+<h2>ScienceDirect (API)<a class="headerlink" href="#sciencedirect-api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="goto_publication.providers.ScienceDirectAPI">
+<em class="property">class </em><code class="sig-prename descclassname">goto_publication.providers.</code><code class="sig-name descname">ScienceDirectAPI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api_key</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">concepts</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goto_publication.providers.ScienceDirectAPI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Science Direct (Elsevier) API.</p>
+<p>Getting the DOI requires a valid API key (Get one at <a class="reference external" href="https://dev.elsevier.com/index.html">https://dev.elsevier.com/index.html</a>).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that for this kind of usage, the person who uses the Elsevier API
+needs to be a member of an organization that subscribed to an Elsevier product
+(see <a class="reference external" href="https://dev.elsevier.com/policy.html">https://dev.elsevier.com/policy.html</a>, section “Federated Search”).</p>
+</div>
+<dl class="py method">
+<dt id="goto_publication.providers.ScienceDirectAPI.get_doi">
+<code class="sig-name descname">get_doi</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.ScienceDirectAPI.get_doi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the API in one single request.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.ScienceDirectAPI.get_journals">
+<code class="sig-name descname">get_journals</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="api.html#goto_publication.journal.Journal" title="goto_publication.journal.Journal">goto_publication.journal.Journal</a><span class="p">]</span><a class="headerlink" href="#goto_publication.providers.ScienceDirectAPI.get_journals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the API.
+Assumption: by looking for “volume 1, page 1”, one gets every first page of every journal.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="springer">
+<h2>Springer<a class="headerlink" href="#springer" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="goto_publication.providers.Springer">
+<em class="property">class </em><code class="sig-prename descclassname">goto_publication.providers.</code><code class="sig-name descname">Springer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">concepts</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goto_publication.providers.Springer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Springer have a messed up notation for its article (mixing between pages and article number)
+and their API (<a class="reference external" href="https://dev.springernature.com/adding-constraints">https://dev.springernature.com/adding-constraints</a>) does not provide a page or article number search
+(and does not give the article number anyway, except <code class="docutils literal notranslate"><span class="pre">e-location</span></code> in the jats output, which is sloooooow).</p>
+<p>Thus, it is impossible to get the exact URL or DOI without any further information.</p>
+<dl class="py method">
+<dt id="goto_publication.providers.Springer.get_journals">
+<code class="sig-name descname">get_journals</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="api.html#goto_publication.journal.Journal" title="goto_publication.journal.Journal">goto_publication.journal.Journal</a><span class="p">]</span><a class="headerlink" href="#goto_publication.providers.Springer.get_journals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the journal based on their search form. Use the CSV output (that was unexpected!).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.Springer.get_url">
+<code class="sig-name descname">get_url</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.Springer.get_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Go to TOC of the volume, find your way into that ;)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="wiley">
+<h2>Wiley<a class="headerlink" href="#wiley" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="goto_publication.providers.Wiley">
+<em class="property">class </em><code class="sig-prename descclassname">goto_publication.providers.</code><code class="sig-name descname">Wiley</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">concepts</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#goto_publication.providers.Wiley" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wiley.</p>
+<p>Perform the request on their search page API, since there is no other correct API available.
+Sorry about that, open to any suggestion.</p>
+<dl class="py method">
+<dt id="goto_publication.providers.Wiley.get_doi">
+<code class="sig-name descname">get_doi</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.Wiley.get_doi" title="Permalink to this definition">¶</a></dt>
+<dd><p>The DOI is actually found in the URL, so requires one single request as well.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.Wiley.get_journals">
+<code class="sig-name descname">get_journals</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="api.html#goto_publication.journal.Journal" title="goto_publication.journal.Journal">goto_publication.journal.Journal</a><span class="p">]</span><a class="headerlink" href="#goto_publication.providers.Wiley.get_journals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the list from <a class="reference external" href="https://onlinelibrary.wiley.com/action/showPublications">https://onlinelibrary.wiley.com/action/showPublications</a>.
+Since the list is actually long (and the request takes longer if the pages are large),
+fetch the results 50 by 50 (I didn’t try to optimize that).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="goto_publication.providers.Wiley.get_url">
+<code class="sig-name descname">get_url</code><span class="sig-paren">(</span><em class="sig-param">journal_identifier: Any, volume: [&lt;class 'str'&gt;, &lt;class 'int'&gt;], page: str, **kwargs: dict</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#goto_publication.providers.Wiley.get_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Require a single request to get the url (which contains the DOI).</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="api.html" class="btn btn-neutral float-left" title="API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Pierre Beaujean
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
