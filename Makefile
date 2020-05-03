@@ -5,6 +5,7 @@ help:
 	@echo "  init                        to install python dependencies"
 	@echo "  sync                        update dependencies of pipenv"
 	@echo "  lint                        to lint backend code (flake8)"
+	@echo "  doc                         to build doc"
 	@echo "  test                        to run tests"
 	@echo "  help                        to get this help"
 
@@ -23,4 +24,7 @@ lint:
 
 tests:
 	python -m unittest discover -s goto_publication.tests
+
+doc:
+	cd documentation; make html
 

@@ -1,4 +1,4 @@
-![The logo. I suck at that ;)](./doc/logo.svg)
+![The logo. I suck at that ;)](doc/source/_static/logo.svg)
 
 # GOTO publication
 
