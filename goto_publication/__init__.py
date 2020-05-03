@@ -6,7 +6,7 @@ import pathlib
 import os
 from os import path
 
-__version__ = '0.2.1'
+__version__ = '0.3'
 __author__ = 'Pierre Beaujean'
 __maintainer__ = 'Pierre Beaujean'
 __email__ = 'pierre.beaujean@unamur.be'
