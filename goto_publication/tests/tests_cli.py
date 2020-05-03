@@ -130,7 +130,7 @@ class TestCLI(unittest.TestCase):
 
         # default cutoff with suggestions
         out = yaml.load(
-            self.run_gt(['-J', self.alternate_journal_list, 'suggests', self.journals[0].abbr]),
+            self.run_gt(['-J', self.alternate_journal_list, 'suggest', self.journals[0].abbr]),
             Loader=yaml.Loader)
 
         self.assertEqual(out['suggestions'][0], self.journals[0].name)
@@ -138,7 +138,7 @@ class TestCLI(unittest.TestCase):
 
         # small cutoff
         out = yaml.load(
-            self.run_gt(['-J', self.alternate_journal_list, 'suggests', self.journals[0].abbr, '-C', 0.1]),
+            self.run_gt(['-J', self.alternate_journal_list, 'suggest', self.journals[0].abbr, '-C', 0.1]),
             Loader=yaml.Loader)
 
         self.assertEqual(out['suggestions'][0], self.journals[0].name)
@@ -146,7 +146,7 @@ class TestCLI(unittest.TestCase):
 
         # default cutoff and name
         out = yaml.load(
-            self.run_gt(['-J', self.alternate_journal_list, 'suggests', self.journals[0].name, '-S', 'name']),
+            self.run_gt(['-J', self.alternate_journal_list, 'suggest', self.journals[0].name, '-S', 'name']),
             Loader=yaml.Loader)
 
         self.assertEqual(out['suggestions'][0], self.journals[0].name)
@@ -155,7 +155,7 @@ class TestCLI(unittest.TestCase):
         # stronger cutoff and name
         out = yaml.load(
             self.run_gt(
-                ['-J', self.alternate_journal_list, 'suggests', self.journals[0].name, '-S', 'name', '-C', 0.8]),
+                ['-J', self.alternate_journal_list, 'suggest', self.journals[0].name, '-S', 'name', '-C', 0.8]),
             Loader=yaml.Loader)
 
         self.assertEqual(out['suggestions'][0], self.journals[0].name)
