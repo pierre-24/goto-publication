@@ -2,6 +2,9 @@
 goto-publication
 ================
 
+.. image:: https://pierre-24.github.io/goto-publication/_static/logo.svg
+    :target: https://pierre-24.github.io/goto-publication/
+
 .. image:: https://travis-ci.org/pierre-24/goto-publication.svg?branch=dev
     :target: https://travis-ci.org/pierre-24/goto-publication
 
@@ -50,4 +53,4 @@ Or directly (but it is slower) its DOI:
     url: https://dx.doi.org/10.1038/227680a0
 
 
-In the documentation, you can find more information about the `installation <ghpage>`_  (also for contributors) and the `usage of the different commands <ghpage2>`_.
+In the documentation, you can find more information about the `installation <https://pierre-24.github.io/goto-publication/installing.html>`_  (also for contributors) and the `usage of the different commands <https://pierre-24.github.io/goto-publication/usage.html>`_.
