@@ -2,6 +2,9 @@
 goto-publication
 ================
 
+.. image:: https://travis-ci.org/pierre-24/goto-publication.svg?branch=dev
+    :target: https://travis-ci.org/pierre-24/goto-publication
+
 
 *Citation-based URL/DOI searches*, by `Pierre Beaujean <https://pierrebeaujean.net>`_.
 CLI version of `that previous project <https://github.com/pierre-24/goto-publication-old/>`_.
