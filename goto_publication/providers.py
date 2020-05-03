@@ -43,7 +43,6 @@ class Provider:
 
         return {
             'providerName': self.NAME,
-            'providerIcon': self.ICON_URL,
             'providerWebsite': self.WEBSITE_URL,
         }
 

@@ -159,16 +159,16 @@ def get_arguments_parser():
     parser_list_journals.add_argument('-c', '--count', help='Maximum number of results', type=int, default=10)
 
     # suggests journal
-    parser_suggests = subparsers.add_parser('suggests')
-    parser_suggests.add_argument('q', help='query')
-    parser_suggests.add_argument(
+    parser_suggest = subparsers.add_parser('suggest')
+    parser_suggest.add_argument('q', help='query')
+    parser_suggest.add_argument(
         '-S', '--source',
         choices=('name', 'abbr'),
         help='search in journal title (name) or abbreviation (abbr, default)',
         default='abbr'
     )
-    parser_suggests.add_argument('-c', '--count', help='Maximum number of results', type=int, default=10)
-    parser_suggests.add_argument(
+    parser_suggest.add_argument('-c', '--count', help='Maximum number of results', type=int, default=10)
+    parser_suggest.add_argument(
         '-C', '--cutoff',
         type=float,
         help='Severity cutoff on the results (must be between 0 and 1, the larger, the severer)',
@@ -217,7 +217,7 @@ def main():
         dumps(args, list_providers(args, journal_registry))
     elif args.search_section == 'journals':
         dumps(args, list_journals(args, journal_registry))
-    elif args.search_section == 'suggests':
+    elif args.search_section == 'suggest':
         dumps(args, suggests(args, journal_registry))
     elif args.search_section == 'journal':
         dumps(args, journal(args, journal_registry))

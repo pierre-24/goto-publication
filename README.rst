@@ -2,8 +2,9 @@
 goto-publication
 ================
 
-.. image:: https://pierre-24.github.io/goto-publication/_static/logo.svg
+.. figure:: https://pierre-24.github.io/goto-publication/_static/logo.svg
     :target: https://pierre-24.github.io/goto-publication/
+    :align: center
 
 .. image:: https://travis-ci.org/pierre-24/goto-publication.svg?branch=dev
     :target: https://travis-ci.org/pierre-24/goto-publication

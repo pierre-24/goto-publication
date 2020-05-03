@@ -13,6 +13,6 @@ script:
   - make lint
   - |
     # upgrade doc, but only when pushing to "dev" branch
-    # if [[ "$TRAVIS_BRANCH" == "dev" ]] && [[ "$TRAVIS_PULL_REQUEST" == false ]]; then
+    if [[ "$TRAVIS_BRANCH" == "dev" ]] && [[ "$TRAVIS_PULL_REQUEST" == false ]]; then
     ./publish-doc.sh
-    # fi
+    fi

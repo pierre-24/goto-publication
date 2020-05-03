@@ -4,7 +4,7 @@ Installing
 
 .. warning::
 
-    You need first need Python >= 3.5.
+    You need need Python >= 3.5 and pip >= 20.
 
 If you just want to use ``goto-publication``
 --------------------------------------------
@@ -16,14 +16,12 @@ The easiest way is to use ``pip``:
    $ pip3 install git+https://github.com/pierre-24/goto-publication.git@dev
 
 
-.. note::
+Note that you can add use ``install --user`` instead, to install the package without being superuser (see `the pypa documentation <https://pip.pypa.io/en/stable/user_guide/#user-installs>`_).
+You will probably need to add ``$HOME/.local/bin`` to ``$PATH`` for this to work:
 
-    Note that you can add use ``install --user`` instead, to install the package without being superuser (see `the pypa documentation <https://pip.pypa.io/en/stable/user_guide/#user-installs>`_).
-    You will probably need to add ``$HOME/.local/bin`` to ``$PATH`` for this to work:
+.. code-block:: bash
 
-    .. code-block:: bash
-
-      $ echo 'PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
+  $ echo 'PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
 
 Then, `find more details about usage here <usage.html>`_
 
