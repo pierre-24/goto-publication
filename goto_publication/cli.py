@@ -206,7 +206,11 @@ def main():
     args = parser.parse_args()
 
     # create journal registry
-    journal_registry = registry.Registry(args.journal_registry, create_providers())
+    try:
+        journal_registry = registry.Registry(create_providers(), args.journal_registry)
+    except registry.RegistryError as e:
+        print(make_error(e.what, e.var))
+        return 1
 
     # output what was requested
     if args.search_section == 'providers':
@@ -220,6 +224,8 @@ def main():
     elif args.search_section == 'get':
         dumps(args, get_info(args, journal_registry))
 
+    return 0
+
 
 if __name__ == '__main__':
-    main()
+    exit(main())

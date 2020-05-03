@@ -9,7 +9,7 @@ import yaml
 from goto_publication import create_providers, providers, journal
 
 
-class TestProviders(unittest.TestCase):
+class TestCLI(unittest.TestCase):
     """Check if CLI behaves correctly
     """
 

@@ -1,7 +1,7 @@
 from typing import Any, Dict
 import iso4
 
-from goto_publication import providers
+import goto_publication
 
 
 class JournalError(Exception):
@@ -18,7 +18,7 @@ class Journal:
     """Define a journal_identifier, containing different articles, which have an URL and a DOI (if valid).
     """
 
-    def __init__(self, name: str, identifier: Any, provider: 'providers.Provider', abbr: str = None):
+    def __init__(self, name: str, identifier: Any, provider: 'goto_publication.providers.Provider', abbr: str = None):
         self.name = name
         self.identifier = identifier
         self.abbr = abbr
@@ -37,11 +37,14 @@ class Journal:
         }
 
     @classmethod
-    def deserialize(cls, d: Dict[str, Any], provider: 'providers.Provider'):
+    def deserialize(cls, d: Dict[str, Any], provider: 'goto_publication.providers.Provider'):
         return cls(d.get('name'), d.get('identifier'), provider, d.get('abbr', None))
 
     def get_url(self, volume: [int, str], page: [int, str], **kwargs: dict) -> str:
         """Get the corresponding url"""
+
+        # avoid cyclic imports
+        from goto_publication import providers
 
         try:
             return self.provider.get_url(self.identifier, volume, page, **kwargs)
@@ -52,6 +55,9 @@ class Journal:
 
     def get_doi(self, volume: [int, str], page: [int, str], **kwargs: dict) -> str:
         """Get the corresponding DOI"""
+
+        # avoid cyclic imports
+        from goto_publication import providers
 
         try:
             return self.provider.get_doi(self.identifier, volume, page, **kwargs)
