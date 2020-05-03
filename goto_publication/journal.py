@@ -1,3 +1,13 @@
+"""
+Represent a given journal, with
+
++ A name (title)
++ An abbreviation (that may be auto-generated from the previous field)
++ An internal identifier (that the provider uses in its URLs and/or forms)
+
+A journal may be (de)serialized in the form of a dictionary (containing the 3 above information, plus its provider).
+"""
+
 from typing import Any, Dict
 import iso4
 
@@ -15,7 +25,7 @@ class AccessError(JournalError):
 
 
 class Journal:
-    """Define a journal_identifier, containing different articles, which have an URL and a DOI (if valid).
+    """Define a journal, containing different articles, which have an URL and a DOI (if valid).
     """
 
     def __init__(self, name: str, identifier: Any, provider: 'goto_publication.providers.Provider', abbr: str = None):
@@ -37,7 +47,13 @@ class Journal:
         }
 
     @classmethod
-    def deserialize(cls, d: Dict[str, Any], provider: 'goto_publication.providers.Provider'):
+    def deserialize(cls, d: Dict[str, Any], provider: 'goto_publication.providers.Provider') -> 'Journal':
+        """
+        Deserialize a dictionary into a journal
+
+        :param d: the dictionary.
+        :param provider: the provider from which the journal is issued.
+        """
         return cls(d.get('name'), d.get('identifier'), provider, d.get('abbr', None))
 
     def get_url(self, volume: [int, str], page: [int, str], **kwargs: dict) -> str:

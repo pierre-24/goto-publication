@@ -16,7 +16,7 @@ It is reduced to 3 (sometimes 4) components:
 + The (starting) **page** or **article number** in some journal ;
 + And, yeah, sometimes, the **issue** is required.
 
-In the following, the only the 3 first information are required:
+In the following, only the 3 first information are required:
 
 .. code:: console
 
@@ -45,7 +45,9 @@ Note that there is two way to retrieve the information about an article:
     + Each journal is stored in a **registry**.
     + A journal has a **name** (= title) and an abbreviation (which normally follows the `ISO 4 convention <https://en.wikipedia.org/wiki/ISO_4>`_).
 
-    The program comes with its own registry, which is a bit chemistry + physics oriented.
+.. warning::
+
+    The program comes with its own registry, which is a chemistry + physics oriented (since I'm the primary user of this tool).
     You can change that (see below), but it is currently not easy and well documented (future release will definitely fix that).
 
 Detailed usage
@@ -76,6 +78,33 @@ Get info about an article: retrieve either its DOI (with ``--DOI``) or its URL (
 
 For the moment, you need to give the **exact journal name**, as found in the registry (see below for suggestions).
 That will be fix'd in future releases.
+
+.. note::
+
+    ``goto-publication`` takes advantage of the `Elsevier API <https://dev.elsevier.com/index.html>`_, which requires a key.
+    By default, you are limited to URL:
+
+    .. code:: console
+
+        $ goto-publication get 'Chemical Physics' 493 200
+        providerName: ScienceDirect (API)
+        providerWebsite: https://www.sciencedirect.com/
+        url: https://www.sciencedirect.com/search/advanced?pub=Chemical+Physics&volume=493&page=200
+        $ goto-publication get 'Chemical Physics' 493 200 --doi
+        message:
+          journal: Not yet implemented (Chemical Physics [sd])
+
+    But if you have an API key, you can set the environement variable ``$SD_API_KEY``.
+
+    .. code:: console
+
+        $ export SD_API_KEY=xxxxxxxxxxxxxxxxxxxx
+        $ goto-publication get 'Chemical Physics' 493 200 --doi
+        doi: 10.1016/j.chemphys.2017.04.003
+        providerName: ScienceDirect (API)
+        providerWebsite: https://www.sciencedirect.com/
+        url: https://dx.doi.org/10.1016/j.chemphys.2017.04.003
+
 
 Suggest journals
 ++++++++++++++++

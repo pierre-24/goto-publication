@@ -1,3 +1,8 @@
+"""
+"high-level" API: a registry contains all providers and a list of all journals (coming from a YAML-formatted file),
+which it uses for suggestions, getting URL or DOI.
+"""
+
 from typing import List
 import yaml
 import difflib
@@ -108,6 +113,11 @@ class Registry:
 
     def get_url(self, journal: str, volume: str, page: str, **kwargs: dict) -> dict:
         """Get the URL
+
+        :param journal: journal name
+        :param volume: volume
+        :param page: (starting) page
+        :param kwargs: extra arguments
         """
 
         self._check_input(journal, volume, page, **kwargs)
@@ -124,6 +134,11 @@ class Registry:
 
     def get_doi(self, journal: str, volume: str, page: str, **kwargs: dict) -> dict:
         """Get the DOI
+
+        :param journal: journal name
+        :param volume: volume
+        :param page: (starting) page
+        :param kwargs: extra arguments
         """
 
         self._check_input(journal, volume, page, **kwargs)
